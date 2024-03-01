@@ -1,0 +1,43 @@
+### Basal Metabolic Rate by Weight and Birth Gender
+
+Basal metabolic rate (BMR) varies by gender, weight, and age. Here's a general estimate of typical daily basal calorie requirements for adults by birth gender (male and female) and by weight in increments of 10 pounds from 100 to 250 lbs. Please note that these are rough estimates, and individual BMR can vary based on factors like muscle mass, activity level, and genetics. These values assume a sedentary lifestyle:
+
+**Male:**
+
+- 100 lbs: ~1,200 calories
+- 110 lbs: ~1,320 calories
+- 120 lbs: ~1,440 calories
+- 130 lbs: ~1,560 calories
+- 140 lbs: ~1,680 calories
+- 150 lbs: ~1,800 calories
+- 160 lbs: ~1,920 calories
+- 170 lbs: ~2,040 calories
+- 180 lbs: ~2,160 calories
+- 190 lbs: ~2,280 calories
+- 200 lbs: ~2,400 calories
+- 210 lbs: ~2,520 calories
+- 220 lbs: ~2,640 calories
+- 230 lbs: ~2,760 calories
+- 240 lbs: ~2,880 calories
+- 250 lbs: ~3,000 calories
+
+**Female:**
+
+- 100 lbs: ~1,000 calories
+- 110 lbs: ~1,100 calories
+- 120 lbs: ~1,200 calories
+- 130 lbs: ~1,300 calories
+- 140 lbs: ~1,400 calories
+- 150 lbs: ~1,500 calories
+- 160 lbs: ~1,600 calories
+- 170 lbs: ~1,700 calories
+- 180 lbs: ~1,800 calories
+- 190 lbs: ~1,900 calories
+- 200 lbs: ~2,000 calories
+- 210 lbs: ~2,100 calories
+- 220 lbs: ~2,200 calories
+- 230 lbs: ~2,300 calories
+- 240 lbs: ~2,400 calories
+- 250 lbs: ~2,500 calories
+
+Again, these are just rough estimates. To get a more accurate picture of your daily calorie needs, it's best to consult with a registered dietitian or use a BMR calculator that takes into account more detailed information about your individual characteristics and activity level.
