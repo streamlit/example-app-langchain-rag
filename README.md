@@ -66,6 +66,22 @@ python basic_chain.py
 streamlit run streamlit_app.py
 ```
 
+3. Run Individual Example Programs
+
+The most of the Python source files besides `streamlit_app.py` have a main defined
+so that you can execute them directly as an example or test.
+
+For example, the main in `ensemble.py` will use context from an online version of the book [*The Problems of Philosophy* by Bertrand Russell](https://www.gutenberg.org/ebooks/5827.html.images)
+to answer "What are the key problems of philosophy according to Russell?"
+
+```bash
+python ensemble.py
+```
+
+>    Split into 313 chunks
+>    According to Russell, the key problems of philosophy include the uncertainty of knowledge, the limitations of metaphysical reasoning, and the inability to provide definite answers to fundamental questions. Philosophy aims to diminish the risk of error, but cannot eliminate it entirely due to human fallibility. The value of philosophy lies in its ability to challenge common sense beliefs and lead to the exploration of complex problems.
+
+
 
 ## Example Queries for Streamlit App
 
@@ -124,7 +140,7 @@ shared under the [CC0: Public Domain](https://creativecommons.org/publicdomain/z
 * The file `examples/healthy_meal_10_tips.pdf` was published by thes USDA, Center for Nutrition Policy and Promotion and was retrieved from Wikimedia  Commons, and is in the public domain.
 [See page for author, Public domain, via Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Build_a_healthy_meal_10_tips_for_healthy_meals_(IA_CAT31299650).pdf).
 * The file `examples/mal_boole.pdf` is in the public domain. Boole, G. (1847, January 1). The Mathematical Analysis of Logic. Retrieved from Project Gutenberg at https://www.gutenberg.org/ebooks/36884.
-
+* The file `examples/grocery.md` is just a grocery list.
 
 ## References
 

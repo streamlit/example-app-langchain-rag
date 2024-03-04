@@ -55,7 +55,6 @@ def main():
     queries = [
         "Generate a grocery list for my family meal plan for the next week(following 7 days). Prefer local, in-season ingredients."
         "Create a list of estimated calorie counts and grams of carbohydrates for each meal."
-        "How do I make biscuits according to the recipes I provided you?"
     ]
 
     for query in queries:

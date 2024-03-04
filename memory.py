@@ -1,14 +1,18 @@
 import os
+from typing import List, Iterable, Any
 
 from dotenv import load_dotenv
 from langchain.memory import ChatMessageHistory
+from langchain_core.callbacks import CallbackManagerForRetrieverRun
+from langchain_core.chat_history import BaseChatMessageHistory
+from langchain_core.documents import Document
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.runnables import RunnablePassthrough
-from langchain_core.chat_history import BaseChatMessageHistory
+from langchain_core.retrievers import BaseRetriever
 from langchain_core.runnables.history import RunnableWithMessageHistory
 
-from basic_chain import basic_chain, get_model
+from basic_chain import get_model
+from rag_chain import make_rag_chain
 
 
 def create_memory_chain(llm, base_chain, chat_memory):
@@ -39,6 +43,23 @@ def create_memory_chain(llm, base_chain, chat_memory):
     return with_message_history
 
 
+class SimpleTextRetriever(BaseRetriever):
+    docs: List[Document]
+    """Documents."""
+
+    @classmethod
+    def from_texts(
+            cls,
+            texts: Iterable[str],
+            **kwargs: Any,
+    ):
+        docs = [Document(page_content=t) for t in texts]
+        return cls(docs=docs, **kwargs)
+
+    def _get_relevant_documents(
+            self, query: str, *, run_manager: CallbackManagerForRetrieverRun
+    ) -> List[Document]:
+        return self.docs
 
 
 def main():
@@ -55,13 +76,14 @@ def main():
         ]
     )
 
-    chain = create_memory_chain(model, basic_chain(model, prompt=prompt), chat_memory) | StrOutputParser()
+    text_path = "examples/grocery.md"
+    text = open(text_path, "r").read()
+    retriever = SimpleTextRetriever.from_texts([text])
+    rag_chain = make_rag_chain(model, retriever, rag_prompt=None)
+    chain = create_memory_chain(model, rag_chain, chat_memory) | StrOutputParser()
     queries = [
-        "Can you help me remember my grocery list. I need to buy eggs, milk, and bread at the grocery store. Please return just these items if asked.",
         "What do I need to get from the grocery store besides milk?",
-        "What other groceries should I buy, if I am planning on grilling cheeseburgers for a dinner party?",
-        "What kinds of pickles are most popular for hamburgers?",
-        "Generate two lists of ingredients for my party, one for omnivores and one for vegans.",
+        "Which of these items can I find at a farmer's market?",
     ]
 
     for query in queries:

@@ -1,10 +1,11 @@
-
 import os
-from langchain_community.embeddings import HuggingFaceEmbeddings, OpenAIEmbeddings
+
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from local_loader import get_document_text
 from remote_loader import download_file
 from splitter import split_documents
+from dotenv import load_dotenv
 
 
 # This happens all at once, not ideal for large datasets.
@@ -12,6 +13,7 @@ def create_vector_db(texts, embeddings=None, collection_name="chroma"):
     # Select embeddings
     if not embeddings:
         # To use HuggingFace embeddings instead:
+        # from langchain_community.embeddings import HuggingFaceEmbeddings
         # embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
         OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
         embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY, model="text-embedding-3-small")
@@ -33,6 +35,8 @@ def find_similar(vs, query):
 
 
 def main():
+    load_dotenv()
+
     pdf_filename = "examples/mal_boole.pdf"
 
     if not os.path.exists(pdf_filename):
