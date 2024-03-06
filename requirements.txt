@@ -7,7 +7,7 @@ langchain-openai==0.0.5
 langchain-openai==0.0.8
 langchain==0.1.4
 langchainhub==0.1.14
-langchain~=0.1.4
+langchain~=0.1.11
 pypdf2~=3.0.1
 python-dotenv~=1.0.1
 rank-bm25==0.2.2
