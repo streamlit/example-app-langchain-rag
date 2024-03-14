@@ -2,7 +2,7 @@ beautifulsoup4==4.12.3
 chroma-hnswlib==0.7.3
 chromadb==0.3.29
 langchain-community==0.0.16
-langchain-core==0.1.28
+langchain-core==0.1.30
 langchain-openai==0.0.5
 langchain-openai==0.0.8
 langchain==0.1.4
