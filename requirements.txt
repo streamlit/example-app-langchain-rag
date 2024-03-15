@@ -1,13 +1,11 @@
 beautifulsoup4==4.12.3
 chroma-hnswlib==0.7.3
 chromadb==0.3.29
-langchain-community==0.0.16
-langchain-core==0.1.28
-langchain-openai==0.0.5
+langchain-community<0.0.25
+langchain-core==0.1.32
 langchain-openai==0.0.8
-langchain==0.1.4
 langchainhub==0.1.14
-langchain~=0.1.4
+langchain==0.1.9
 pypdf2~=3.0.1
 python-dotenv~=1.0.1
 rank-bm25==0.2.2
