@@ -13,7 +13,7 @@ python-dotenv~=1.0.1
 rank-bm25==0.2.2
 requests~=2.31.0
 sentence-transformers==2.4.0
-streamlit==1.30.0
+streamlit==1.31.1
 tabulate==0.9.0
 unstructured[pdf,s3]==0.12.4
 wikipedia==1.4.0

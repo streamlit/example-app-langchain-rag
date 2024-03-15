@@ -3,6 +3,7 @@ import os
 import streamlit as st
 from langchain_community.chat_message_histories import StreamlitChatMessageHistory
 
+from ensemble import ensemble_retriever_from_docs
 from full_chain import create_full_chain, ask_question
 from local_loader import load_txt_files
 
@@ -35,6 +36,18 @@ def show_ui(qa, prompt_to_user="How may I help you?"):
         st.session_state.messages.append(message)
 
 
+@st.cache_resource
+def get_retriever():
+    docs = load_txt_files()
+    return ensemble_retriever_from_docs(docs)
+
+
+def get_chain():
+    ensemble_retriever = get_retriever()
+    chain = create_full_chain(ensemble_retriever, chat_memory=StreamlitChatMessageHistory(key="langchain_messages"))
+    return chain
+
+
 def run():
     ready = True
     if 'HUGGINGFACEHUB_API_TOKEN' in st.secrets:
@@ -51,9 +64,10 @@ def run():
         st.write("Missing OPENAI_API_KEY")
         ready = False
 
+    # TODO: let them enter their own key if not provided.
+
     if ready:
-        docs = load_txt_files()
-        chain = create_full_chain(docs, chat_memory = StreamlitChatMessageHistory(key="langchain_messages"))
+        chain = get_chain()
         st.subheader("Ask me questions about this week's meal plan")
         show_ui(chain, "What would you like to know?")
 

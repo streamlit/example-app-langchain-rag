@@ -11,8 +11,7 @@ from memory import create_memory_chain
 from rag_chain import make_rag_chain
 
 
-def create_full_chain(docs, chat_memory=ChatMessageHistory()):
-    ensemble_retriever = ensemble_retriever_from_docs(docs)
+def create_full_chain(retriever, chat_memory=ChatMessageHistory()):
     model = get_model("ChatGPT")
     system_prompt = """You are a helpful AI assistant for busy professionals trying to improve their health.
     Use the following context and the users' chat history to help the user:
@@ -29,7 +28,7 @@ def create_full_chain(docs, chat_memory=ChatMessageHistory()):
         ]
     )
 
-    rag_chain = make_rag_chain(model, ensemble_retriever, rag_prompt=prompt)
+    rag_chain = make_rag_chain(model, retriever, rag_prompt=prompt)
     chain = create_memory_chain(model, rag_chain, chat_memory)
     return chain
 
@@ -50,7 +49,8 @@ def main():
     console = Console()
 
     docs = load_txt_files()
-    chain = create_full_chain(docs)
+    ensemble_retriever = ensemble_retriever_from_docs(docs)
+    chain = create_full_chain(ensemble_retriever)
 
     queries = [
         "Generate a grocery list for my family meal plan for the next week(following 7 days). Prefer local, in-season ingredients."
