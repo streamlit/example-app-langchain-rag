@@ -1,0 +1,2 @@
+libblas-dev 
+liblapack-dev
