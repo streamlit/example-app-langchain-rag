@@ -3,7 +3,7 @@ chromadb==0.3.29
 huggingface-hub==0.21.3
 langchain==0.1.9
 langchain-community==0.0.24
-langchain-core==0.1.32
+langchain-core==0.1.35
 langchain-openai==0.0.8
 langchain-text-splitters==0.0.1
 langchainhub==0.1.14
