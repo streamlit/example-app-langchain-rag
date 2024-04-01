@@ -12,8 +12,6 @@ st.set_page_config(page_title="LangChain & Streamlit RAG")
 st.title("LangChain & Streamlit RAG")
 
 
-
-
 def show_ui(qa, prompt_to_user="How may I help you?"):
     if "messages" not in st.session_state.keys():
         st.session_state.messages = [{"role": "assistant", "content": prompt_to_user}]
@@ -47,7 +45,6 @@ def get_retriever(openai_api_key=None):
 
 
 def get_chain(openai_api_key=None, huggingfacehub_api_token=None):
-    # TODO: this needs hf api token somehow
     ensemble_retriever = get_retriever(openai_api_key=openai_api_key)
     chain = create_full_chain(ensemble_retriever,
                               openai_api_key=openai_api_key,
@@ -78,10 +75,12 @@ def run():
 
     with st.sidebar:
         if not openai_api_key:
-            openai_api_key = get_secret_or_input('OPENAI_API_KEY', "OpenAI API key", info_link="https://platform.openai.com/account/api-keys")
+            openai_api_key = get_secret_or_input('OPENAI_API_KEY', "OpenAI API key",
+                                                 info_link="https://platform.openai.com/account/api-keys")
             refresh = True
         if not huggingfacehub_api_token:
-            huggingfacehub_api_token = get_secret_or_input('HUGGINGFACEHUB_API_TOKEN', "HuggingFace Hub API Token", info_link="https://huggingface.co/docs/huggingface_hub/main/en/quick-start#authentication")
+            huggingfacehub_api_token = get_secret_or_input('HUGGINGFACEHUB_API_TOKEN', "HuggingFace Hub API Token",
+                                                           info_link="https://huggingface.co/docs/huggingface_hub/main/en/quick-start#authentication")
             refresh = True
 
     if not openai_api_key:
