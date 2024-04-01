@@ -1,5 +1,3 @@
-import os
-
 import streamlit as st
 from langchain_community.chat_message_histories import StreamlitChatMessageHistory
 from langchain_community.embeddings import OpenAIEmbeddings
@@ -68,7 +66,6 @@ def get_secret_or_input(secret_key, secret_name, info_link=None):
 
 def run():
     ready = True
-    refresh = False
 
     openai_api_key = st.session_state.get("OPENAI_API_KEY")
     huggingfacehub_api_token = st.session_state.get("HUGGINGFACEHUB_API_TOKEN")
@@ -77,11 +74,9 @@ def run():
         if not openai_api_key:
             openai_api_key = get_secret_or_input('OPENAI_API_KEY', "OpenAI API key",
                                                  info_link="https://platform.openai.com/account/api-keys")
-            refresh = True
         if not huggingfacehub_api_token:
             huggingfacehub_api_token = get_secret_or_input('HUGGINGFACEHUB_API_TOKEN', "HuggingFace Hub API Token",
                                                            info_link="https://huggingface.co/docs/huggingface_hub/main/en/quick-start#authentication")
-            refresh = True
 
     if not openai_api_key:
         st.warning("Missing OPENAI_API_KEY")
