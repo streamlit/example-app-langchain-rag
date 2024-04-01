@@ -90,9 +90,6 @@ def run():
         st.warning("Missing HUGGINGFACEHUB_API_TOKEN")
         ready = False
 
-    if ready and refresh:
-        st.rerun()
-
     if ready:
         chain = get_chain(openai_api_key=openai_api_key, huggingfacehub_api_token=huggingfacehub_api_token)
         st.subheader("Ask me questions about this week's meal plan")
