@@ -11,12 +11,14 @@ MISTRAL_ID = "mistralai/Mistral-7B-Instruct-v0.1"
 ZEPHYR_ID = "HuggingFaceH4/zephyr-7b-beta"
 
 
-def get_model(repo_id=ZEPHYR_ID):
+def get_model(repo_id=ZEPHYR_ID, **kwargs):
     if repo_id == "ChatGPT":
-        chat_model = ChatOpenAI(temperature=0)
+        chat_model = ChatOpenAI(temperature=0, **kwargs)
     else:
+        huggingfacehub_api_token = kwargs.get("HUGGINGFACEHUB_API_TOKEN", None)
         llm = HuggingFaceHub(
             repo_id=repo_id,
+            huggingfacehub_api_token=huggingfacehub_api_token,
             task="text-generation",
             model_kwargs={
                 "max_new_tokens": 512,

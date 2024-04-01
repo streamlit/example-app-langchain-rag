@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 from langchain.docstore.document import Document
 from langchain_community.document_loaders import TextLoader
 from langchain_community.document_loaders.csv_loader import CSVLoader

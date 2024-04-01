@@ -32,8 +32,8 @@ def create_vector_db(texts, embeddings=None, collection_name="chroma"):
         # To use HuggingFace embeddings instead:
         # from langchain_community.embeddings import HuggingFaceEmbeddings
         # embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-        OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
-        embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY, model="text-embedding-3-small")
+        openai_api_key = os.environ["OPENAI_API_KEY"]
+        embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key, model="text-embedding-3-small")
 
     proxy_embeddings = EmbeddingProxy(embeddings)
     # Create a vectorstore from documents

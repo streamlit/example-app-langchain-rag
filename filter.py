@@ -1,6 +1,6 @@
 from langchain.retrievers.document_compressors import DocumentCompressorPipeline
 from langchain_community.document_transformers import EmbeddingsRedundantFilter, LongContextReorder
-from langchain_community.embeddings import HuggingFaceBgeEmbeddings
+from langchain_community.embeddings import HuggingFaceBgeEmbeddings, HuggingFaceEmbeddings
 from langchain_community.retrievers import BM25Retriever
 from langchain.retrievers import EnsembleRetriever, ContextualCompressionRetriever, MergerRetriever
 from langchain.chains import RetrievalQA
@@ -14,15 +14,16 @@ from dotenv import load_dotenv
 
 
 def create_retriever(texts):
-    hf_bge_embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-large-en",
+    dense_embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    sparse_embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-large-en",
                                                  encode_kwargs={'normalize_embeddings': False})
-    dense_vs = create_vector_db(texts, collection_name="dense")
-    sparse_vs = create_vector_db(texts, collection_name="sparse", embeddings=hf_bge_embeddings)
+    dense_vs = create_vector_db(texts, collection_name="dense", embeddings=dense_embeddings)
+    sparse_vs = create_vector_db(texts, collection_name="sparse", embeddings=sparse_embeddings)
     vector_stores = [dense_vs, sparse_vs]
 
-    filter = EmbeddingsRedundantFilter(embeddings=hf_bge_embeddings)
+    emb_filter = EmbeddingsRedundantFilter(embeddings=sparse_embeddings)
     reordering = LongContextReorder()
-    pipeline = DocumentCompressorPipeline(transformers=[filter, reordering])
+    pipeline = DocumentCompressorPipeline(transformers=[emb_filter, reordering])
 
     base_retrievers = [vs.as_retriever() for vs in vector_stores]
     lotr = MergerRetriever(retrievers=base_retrievers)
