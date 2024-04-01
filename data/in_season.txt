@@ -1,6 +1,7 @@
-### The top 50 fresh fruits and vegetables organized by their typical harvest season availability:
+### Top 50 fresh fruits and vegetables organized by their typical harvest season:
 
-**Spring (March - May):**
+#### Spring (March - May):
+
 1. Strawberries
 2. Asparagus
 3. Peas
@@ -12,7 +13,8 @@
 9. Broccoli
 10. Carrots
 
-**Summer (June - August):**
+#### Summer (June - August):
+
 11. Tomatoes
 12. Blueberries
 13. Watermelon
@@ -24,7 +26,8 @@
 19. Cherries
 20. Raspberries
 
-**Early Fall (September - October):**
+#### Early Fall (September - October):
+
 21. Apples
 22. Grapes
 23. Pears
@@ -36,7 +39,8 @@
 29. Sweet potatoes
 30. Pumpkins
 
-**Late Fall (November - December):**
+#### Late Fall (November - December):
+
 31. Cranberries
 32. Brussels sprouts
 33. Kale
@@ -48,7 +52,8 @@
 39. Turnips
 40. Winter squash
 
-**Winter (January - February):**
+#### Winter (January - February):
+
 41. Citrus fruits (oranges, grapefruits, lemons, limes)
 42. Kiwi
 43. Pineapples
@@ -60,4 +65,6 @@
 49. Fennel
 50. Dates
 
-Please note that the specific availability of these fruits and vegetables can vary based on your location and climate, so it's a good idea to check with local farmers' markets or grocery stores for the most accurate information on seasonal produce in your area.
+Note that the specific availability of these fruits and vegetables can vary based on your location and climate,
+so it's a good idea to check with local farmers' markets or grocery stores for the most accurate information on
+seasonal produce in your area.

@@ -2,7 +2,7 @@
 
 Washington state is known for its rich agricultural production. Here's a list of the types of produce that are commonly available from local farmers in Washington state:
 
-**Fruits:**
+#### Fruits:
 
 1. Apples (Washington is famous for its apple orchards)
 2. Cherries (particularly in the Yakima Valley)
@@ -20,7 +20,7 @@ Washington state is known for its rich agricultural production. Here's a list of
 14. Huckleberries (in certain regions)
 15. Nectarines
 
-**Vegetables:**
+#### Vegetables:
 
 16. Potatoes (including famous Washington russet potatoes)
 17. Onions
@@ -48,7 +48,8 @@ Washington state is known for its rich agricultural production. Here's a list of
 39. Swiss chard
 40. Peas
 
-**Berries and Other Specialty Crops:**
+#### Berries and Other Specialty Crops:
+
 41. Marionberries (a type of blackberry)
 42. Boysenberries
 43. Loganberries
@@ -60,7 +61,8 @@ Washington state is known for its rich agricultural production. Here's a list of
 49. Hazelnuts (filberts)
 50. Walnuts
 
-**Herbs:**
+#### Herbs:
+
 51. Mint
 52. Basil
 53. Rosemary
