@@ -17,7 +17,7 @@ pdf2image==1.17.0
 pdfminer.six==20221105
 pdfplumber==0.10.4
 pikepdf==8.13.0
-pillow==10.2.0
+pillow==10.3.0
 pillow_heif==0.15.0
 pyarrow==15.0.0
 pydantic==1.10.14
