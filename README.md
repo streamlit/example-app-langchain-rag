@@ -20,6 +20,14 @@ pip install -U pip
 pip install -r requirements.txt
 ```
 
+If you run into issues related to hnswlib or chroma-hnswlib while installing requirements you may need to install system package for the underlying package.
+
+For example, on Ubuntu 22.04 this was needed before pip install of hnswlib would succeed.
+
+```bash
+sudo apt install python3-hnswlib
+```
+
 ### Setup .env file with API tokens needed.
 
 ```
