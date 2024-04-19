@@ -1,3 +1,5 @@
+import os
+
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
@@ -16,15 +18,19 @@ def get_model(repo_id=ZEPHYR_ID, **kwargs):
         chat_model = ChatOpenAI(temperature=0, **kwargs)
     else:
         huggingfacehub_api_token = kwargs.get("HUGGINGFACEHUB_API_TOKEN", None)
+        if not huggingfacehub_api_token:
+            huggingfacehub_api_token = os.environ.get("HUGGINGFACEHUB_API_TOKEN", None)
+        os.environ["HF_TOKEN"] = huggingfacehub_api_token
+
         llm = HuggingFaceHub(
             repo_id=repo_id,
-            huggingfacehub_api_token=huggingfacehub_api_token,
             task="text-generation",
             model_kwargs={
                 "max_new_tokens": 512,
                 "top_k": 30,
                 "temperature": 0.1,
                 "repetition_penalty": 1.03,
+                "huggingfacehub_api_token": huggingfacehub_api_token,
             })
         chat_model = ChatHuggingFace(llm=llm)
     return chat_model
