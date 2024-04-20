@@ -2,6 +2,7 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.docstore.document import Document
 
+
 def split_documents(docs):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=1000,
@@ -17,4 +18,3 @@ def split_documents(docs):
     n_chunks = len(texts)
     print(f"Split into {n_chunks} chunks")
     return texts
-

@@ -1,3 +1,4 @@
+import logging
 import os
 from typing import List
 
@@ -26,8 +27,11 @@ class EmbeddingProxy:
         return self.embedding.embed_query(text)
 
 
+
 # This happens all at once, not ideal for large datasets.
 def create_vector_db(texts, embeddings=None, collection_name="chroma"):
+    if not texts:
+        logging.warning("Empty texts passed in to create vector database")
     # Select embeddings
     if not embeddings:
         # To use HuggingFace embeddings instead:

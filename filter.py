@@ -1,13 +1,12 @@
 from langchain.retrievers.document_compressors import DocumentCompressorPipeline
 from langchain_community.document_transformers import EmbeddingsRedundantFilter, LongContextReorder
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings, HuggingFaceEmbeddings
-from langchain_community.retrievers import BM25Retriever
 from langchain.retrievers import EnsembleRetriever, ContextualCompressionRetriever, MergerRetriever
 from langchain.chains import RetrievalQA
 
 from basic_chain import get_model
+from ensemble import ensemble_retriever_from_docs
 from remote_loader import load_web_page
-from splitter import split_documents
 from vector_store import create_vector_db
 
 from dotenv import load_dotenv
@@ -32,18 +31,6 @@ def create_retriever(texts):
         base_compressor=pipeline, base_retriever=lotr, search_kwargs={"k": 5, "include_metadata": True}
     )
     return compression_retriever_reordered
-
-
-def ensemble_retriever_from_docs(docs):
-    texts = split_documents(docs)
-    vs_retriever = create_retriever(texts)
-
-    bm25_retriever = BM25Retriever.from_texts([t.page_content for t in texts])
-
-    ensemble_retriever = EnsembleRetriever(
-        retrievers=[bm25_retriever, vs_retriever], weights=[0.5, 0.5])
-
-    return ensemble_retriever
 
 
 def main():
