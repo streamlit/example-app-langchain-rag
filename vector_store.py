@@ -11,6 +11,7 @@ from time import sleep
 
 EMBED_DELAY = 0.02  # 20 milliseconds
 
+
 # This is to get the Streamlit app to use less CPU while embedding documents into Chromadb.
 class EmbeddingProxy:
     def __init__(self, embedding):
@@ -43,7 +44,6 @@ def create_vector_db(texts, embeddings=None, collection_name="chroma"):
                 persist_directory=os.path.join("store/", collection_name))
     db.add_documents(texts)
 
-    # db = Chroma.from_documents(texts, embeddings)
     return db
 
 
