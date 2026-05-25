@@ -1,8 +1,4 @@
-.venv/
+venv/
 __pycache__/
-.DS_Store
-.streamlit/
-.env
-.idea/
-.python-version
-store/
+.streamlit/secrets.toml
+chromadb/

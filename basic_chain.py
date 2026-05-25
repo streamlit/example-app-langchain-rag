@@ -1,60 +1,48 @@
 import os
+from dotenv import load_dotenv
 
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
-from langchain_community.llms import HuggingFaceHub
-from langchain_community.chat_models.huggingface import ChatHuggingFace
+from langchain_groq import ChatGroq
 
-from dotenv import load_dotenv
+DEFAULT_MODEL = "llama-3.1-8b-instant"
 
 
-MISTRAL_ID = "mistralai/Mistral-7B-Instruct-v0.1"
-ZEPHYR_ID = "HuggingFaceH4/zephyr-7b-beta"
-
-
-def get_model(repo_id=ZEPHYR_ID, **kwargs):
-    if repo_id == "ChatGPT":
-        chat_model = ChatOpenAI(temperature=0, **kwargs)
-    else:
-        huggingfacehub_api_token = kwargs.get("HUGGINGFACEHUB_API_TOKEN", None)
-        if not huggingfacehub_api_token:
-            huggingfacehub_api_token = os.environ.get("HUGGINGFACEHUB_API_TOKEN", None)
-        os.environ["HF_TOKEN"] = huggingfacehub_api_token
-
-        llm = HuggingFaceHub(
-            repo_id=repo_id,
-            task="text-generation",
-            model_kwargs={
-                "max_new_tokens": 512,
-                "top_k": 30,
-                "temperature": 0.1,
-                "repetition_penalty": 1.03,
-                "huggingfacehub_api_token": huggingfacehub_api_token,
-            })
-        chat_model = ChatHuggingFace(llm=llm)
-    return chat_model
+def get_model(model_name=DEFAULT_MODEL, groq_api_key=None, **kwargs):
+    """Return a ChatGroq model instance."""
+    api_key = groq_api_key or os.environ.get("GROQ_API_KEY")
+    if not api_key:
+        raise ValueError(
+            "No Groq API key found. Set GROQ_API_KEY in your environment or "
+            "pass groq_api_key= when calling get_model()."
+        )
+    return ChatGroq(
+        groq_api_key=api_key,
+        model_name=model_name,
+        temperature=0,
+        **kwargs,
+    )
 
 
 def basic_chain(model=None, prompt=None):
-    if not model:
+    if model is None:
         model = get_model()
-    if not prompt:
-        prompt = ChatPromptTemplate.from_template("Tell me the most noteworthy books by the author {author}")
-
-    chain = prompt | model
-    return chain
+    if prompt is None:
+        prompt = ChatPromptTemplate.from_template(
+            "Tell me the most noteworthy books by the author {author}"
+        )
+    return prompt | model
 
 
 def main():
     load_dotenv()
-
-    prompt = ChatPromptTemplate.from_template("Tell me the most noteworthy books by the author {author}")
+    prompt = ChatPromptTemplate.from_template(
+        "Tell me the most noteworthy books by the author {author}"
+    )
     chain = basic_chain(prompt=prompt) | StrOutputParser()
+    result = chain.invoke({"author": "William Faulkner"})
+    print(result)
 
-    results = chain.invoke({"author": "William Faulkner"})
-    print(results)
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

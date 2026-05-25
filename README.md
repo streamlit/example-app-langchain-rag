@@ -1,25 +1,97 @@
+# 🤖 RAG Chatbot — LangChain + Groq + Streamlit
 
-# LangChain and Streamlit RAG
+A production-ready Retrieval-Augmented Generation (RAG) chatbot built with
+**LangChain**, **Groq** (free & fast LLM inference), and **Streamlit**.
+Upload your own documents, ask questions, and get grounded answers — all
+running locally or on Streamlit Cloud.
 
-## Demo App on Community Cloud
+---
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://st-lc-rag.streamlit.app/)
+## ✨ Features
 
+- **Hybrid retrieval** — BM25 keyword search + Chroma vector search fused with
+  Reciprocal Rank Fusion (RRF) for best-of-both results
+- **Free embeddings** — `sentence-transformers/all-MiniLM-L6-v2` runs locally,
+  no embedding API key needed
+- **Groq LLM** — ultra-fast inference via `llama3-70b-8192` (free tier
+  available)
+- **Conversation memory** — chat history is preserved across turns in the
+  Streamlit session
+- **Zero OpenAI dependency** — completely removed
 
-## Quickstart
+---
 
-### Setup Python environment
+## 🛠️ Tech Stack
 
-The Python version used when this was developed was 3.10.13
+| Layer | Technology |
+|---|---|
+| UI | Streamlit |
+| LLM | Groq (`llama3-70b-8192`) |
+| Orchestration | LangChain |
+| Embeddings | HuggingFace `all-MiniLM-L6-v2` (local) |
+| Vector store | Chroma |
+| Keyword retrieval | BM25 (`rank-bm25`) |
+| Hybrid fusion | LangChain `EnsembleRetriever` |
 
+---
+
+## 🚀 Quick Start
+
+### 1 — Clone the repo
 
 ```bash
-python -mvenv .venv
-source .venv/bin/activate
+git clone https://github.com/<your-username>/example-app-langchain-rag.git
+cd example-app-langchain-rag
+```
+
+### 2 — Create a virtual environment
+
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# macOS / Linux
+python -m venv venv
+source venv/bin/activate
+```
+
+### 3 — Install dependencies
+
+```bash
 pip install -U pip
 pip install -r requirements.txt
 ```
 
+<<<<<<< HEAD
+### 4 — Get a free Groq API key
+
+1. Visit <https://console.groq.com>
+2. Sign up / log in
+3. Create an API key
+
+### 5 — Set up secrets
+
+```bash
+mkdir .streamlit
+cp .streamlit/secrets.toml.example .streamlit/secrets.toml   # or create manually
+```
+
+Edit `.streamlit/secrets.toml`:
+
+```toml
+GROQ_API_KEY = "gsk_your_key_here"
+```
+
+> **Tip:** You can also paste the key directly into the sidebar at runtime —
+> no file needed for local testing.
+
+### 6 — Add your documents
+
+Drop `.txt`, `.pdf`, or `.md` files into the `data/` directory.
+
+### 7 — Run the app
+=======
 If you run into issues related to hnswlib or chroma-hnswlib while installing requirements you may need to install system package for the underlying package.
 
 For example, on Ubuntu 22.04 this was needed before pip install of hnswlib would succeed.
@@ -69,11 +141,80 @@ python basic_chain.py
 ```
 
 2. Check that Streamlit and dependencies are working.
+>>>>>>> 83d150474fd50d8dae19df2ecf2b57c061bfa497
 
 ```bash
 streamlit run streamlit_app.py
 ```
 
+<<<<<<< HEAD
+---
+
+## ☁️ Deploy to Streamlit Cloud
+
+1. Push your fork to GitHub
+2. Go to <https://share.streamlit.io> → **New app**
+3. Point it at `streamlit_app.py`
+4. In **Advanced settings → Secrets**, add:
+   ```
+   GROQ_API_KEY = "gsk_your_key_here"
+   ```
+5. Deploy 🎉
+
+---
+
+## 📁 Project Structure
+
+```
+├── streamlit_app.py      # Main Streamlit UI
+├── basic_chain.py        # LLM initialisation (Groq)
+├── full_chain.py         # Full RAG + memory chain
+├── ensemble.py           # Hybrid BM25 + vector retriever
+├── rag_chain.py          # RAG chain builder
+├── memory.py             # Conversation memory wrapper
+├── local_loader.py       # Load files from data/
+├── remote_loader.py      # Load web pages
+├── splitter.py           # Document splitting
+├── vector_store.py       # Chroma vector DB helpers
+├── data/                 # ← put your documents here
+├── examples/             # Sample documents
+├── requirements.txt
+└── .streamlit/
+    └── secrets.toml      # API keys (git-ignored)
+```
+
+---
+
+## 🔧 Configuration
+
+| Variable | Where | Description |
+|---|---|---|
+| `GROQ_API_KEY` | `.streamlit/secrets.toml` or sidebar | Groq API key |
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feat/my-feature`
+3. Commit your changes: `git commit -m "feat: add my feature"`
+4. Push: `git push origin feat/my-feature`
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+[Apache 2.0](LICENSE)
+
+---
+
+## 🙏 Acknowledgements
+
+- [Streamlit](https://streamlit.io) for the original example app
+- [LangChain](https://langchain.com) for the RAG framework
+- [Groq](https://groq.com) for blazing-fast free LLM inference
+=======
 3. Run Individual Example Programs
 
 The most of the Python source files besides `streamlit_app.py` have a main defined
@@ -171,3 +312,4 @@ Tunstall, L., Beeching, E., Lambert, N., Rajani, N., Rasul, K., Belkada, Y., �
 
 - There is an issue with newer langchain package versions and streamlit chat history, see https://github.com/langchain-ai/langchain/pull/18834
   - This one reason why a number of dependencies are pinned to specific values.
+>>>>>>> 83d150474fd50d8dae19df2ecf2b57c061bfa497

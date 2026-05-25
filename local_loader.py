@@ -2,7 +2,11 @@ import os
 from pathlib import Path
 
 from pypdf import PdfReader
+<<<<<<< HEAD
+from langchain_core.documents import Document
+=======
 from langchain.docstore.document import Document
+>>>>>>> 83d150474fd50d8dae19df2ecf2b57c061bfa497
 from langchain_community.document_loaders import TextLoader
 from langchain_community.document_loaders.csv_loader import CSVLoader
 
